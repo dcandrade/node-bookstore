@@ -1,5 +1,5 @@
 module.exports = function(app){
-    app.get("/products", function(request, response){
+    var listProducts = function(request, response){
         var connection = app.infra.connectionFactory();
         var productsDAL = new app.infra.ProductsDAO(connection);
 
@@ -10,6 +10,24 @@ module.exports = function(app){
         });
 
         connection.end();
-        //response.render("produtos/lista");
+    };
+
+    app.get("/products", listProducts);
+
+    app.get("/products/form", function(request, response){
+        response.render("products/form");
+    });
+
+    app.post("/products", function(request, response){
+        var product = request.body;
+
+        var connection = app.infra.connectionFactory();
+        var productsDAO = new app.infra.ProductsDAO(connection);
+        
+        productsDAO.insert(product, function(error, result){
+            response.redirect("/products");
+        });
+
+        connection.end();
     });
 }
