@@ -1,8 +1,9 @@
 module.exports = function(app){
     app.get("/products", function(request, response){
         var connection = app.infra.connectionFactory();
+        var productsDAL = new app.infra.ProductsDAO(connection);
 
-        connection.query("SELECT * FROM products", function(error, result){
+        productsDAL.list(function(error, result){
             response.render("products/list", {
                 books: result
             });
