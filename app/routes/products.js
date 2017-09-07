@@ -1,5 +1,5 @@
 module.exports = function(app){
-    app.get("/produtos", function(request, response){
+    app.get("/products", function(request, response){
         var mysql = require("mysql");
         var connection = mysql.createConnection({
             host: "localhost",
@@ -9,9 +9,9 @@ module.exports = function(app){
         });
 
         connection.query("SELECT * FROM products", function(error, result){
-            console.log(error);
-            response.send(result);
-            //response.render("products/list");
+            response.render("products/list", {
+                books: result
+            });
         });
 
         connection.end();

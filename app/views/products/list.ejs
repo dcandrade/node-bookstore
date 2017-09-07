@@ -4,11 +4,17 @@
             <tr>
                 <td>ID</td>
                 <td>Name</td>
+                <td>Description</td>
+                <td>Price</td>
             </tr>
+            <% for(var i=0; i < books.length; i++) { %>
             <tr>
-                <td>1</td>
-                <td>NodeJS Book</td>
+                <td><%= books[i].id %></td>
+                <td><%= books[i].title %></td>
+                <td><%= books[i].description %></td>
+                <td><%= books[i].price  %></td>
             </tr>
+            <% } %>
         </table>
     </body>
 </html>
