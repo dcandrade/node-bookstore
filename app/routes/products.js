@@ -8,8 +8,10 @@ module.exports = function(app){
             database: "bookstore"
         });
 
-        connection.query("SELECT * FROM books", function(error, result){
-            response.send(error + " "+ result);
+        connection.query("SELECT * FROM products", function(error, result){
+            console.log(error);
+            response.send(result);
+            //response.render("products/list");
         });
 
         connection.end();
