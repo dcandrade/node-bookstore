@@ -4,9 +4,17 @@ module.exports = function(app){
         var productsDAL = new app.infra.ProductsDAO(connection);
 
         productsDAL.list(function(error, result){
-            response.render("products/list", {
-                books: result
+            response.format({
+                html: function(){
+                    response.render("products/list", {
+                        books: result
+                    });
+                },
+                json: function(){
+                    response.json(result);
+                }
             });
+        
         });
 
         connection.end();
