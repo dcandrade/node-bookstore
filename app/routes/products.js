@@ -23,11 +23,37 @@ module.exports = function(app){
     app.get("/products", listProducts);
 
     app.get("/products/form", function(request, response){
-        response.render("products/form");
+        response.render("products/form",{
+            validationErrors:{},
+            product:{}
+        });
     });
 
     app.post("/products", function(request, response){
         var product = request.body;
+
+        request.assert('title', 'Title cannot be blank').notEmpty();
+        request.assert('price', 'Invalid price format').isFloat();
+
+        var validationErrors = request.validationErrors();
+        if(validationErrors){
+            response.status(400);
+
+            responseContent =  {
+                validationErrors: validationErrors,
+                product: product
+            };
+            response.format({
+                html: function(){
+                    response.render('products/form', responseContent);
+                },
+                json: function(){
+                    response.json(responseContent);
+                }
+            });
+          
+            return;
+        }
 
         var connection = app.infra.connectionFactory();
         var productsDAO = new app.infra.ProductsDAO(connection);
