@@ -1,4 +1,4 @@
-USE bookstore;
+USE bookstore_dev;
 
 INSERT INTO products(title, description, price)
 VALUES ('Comecando com Nodejs', 'Livro introdutório sobre Nodejs', 39.90);
