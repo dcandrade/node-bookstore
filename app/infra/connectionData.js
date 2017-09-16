@@ -1,16 +1,16 @@
 module.exports = function(){
     return {
         development: {
-            host: "localhost",
-            user: "root",
+            host: "",
+            user: "",
             password: "",
-            database: "bookstore_dev"
+            database: ""
         },
         production: {
-            host: "localhost",
-            user: "root",
+            host: "",
+            user: "",
             password: "",
-            database: "bookstore"
+            database: ""
         }
     }
 }    
