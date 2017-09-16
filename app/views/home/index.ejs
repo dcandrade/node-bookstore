@@ -90,9 +90,9 @@
         <%for(i=0; i<3; i++) {%>
         <li class="col-left">
             <a href="linkDetalhe" class="block clearfix">
-                <img width="170" height="240" src="//cdn.shopify.com/s/files/1/0155/7645/products/nodejs-featured_large.png?v=1411486494" alt="<%=books[i].titulo%>" title="<%=books[i].titulo%>"/>
+                <img width="170" height="240" src="//cdn.shopify.com/s/files/1/0155/7645/products/nodejs-featured_large.png?v=1411486494" alt="<%=books[i].title%>" title="<%=books[i].title%>"/>
 
-                <h2 class="product-title"><%=books[i].titulo%></h2>
+                <h2 class="product-title"><%=books[i].title%></h2>
                 <small class="buy-button">Lan&#231;amento!</small>
             </a>
         </li>
@@ -107,12 +107,12 @@
         <%for(i=0; i<books.length; i++) {%>
             <li>
                 <a href="linkDetalhe" class="block clearfix">
-                    <h2 class="product-title"><%=books[i].titulo%></h2>
+                    <h2 class="product-title"><%=books[i].title%></h2>
                     <img width="143"
                          height="202"
                          src="//cdn.shopify.com/s/files/1/0155/7645/products/nodejs-featured_large.png?v=1411486494"
-                         alt="<%=books[i].titulo%>"
-                         title="<%=books[i].titulo%>"/>
+                         alt="<%=books[i].title%>"
+                         title="<%=books[i].title%>"/>
 
                     <small class="buy-button">Compre</small>
                 </a>
@@ -251,8 +251,8 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io();
-    socket.on('novaPromocao', function(data) {
-        alert("Livro em promoção " + data.livro.id);
+    socket.on('newFlashSale', function(data) {
+        alert("Livro em promoção: " + data.title);
     });
 </script>
 </body>

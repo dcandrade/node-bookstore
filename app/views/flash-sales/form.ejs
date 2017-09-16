@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <form action="/flash-sales" method="POST">
+            <div>
+                <input type="text" name="description">
+            </div>
+            <div>
+                <select name="book[id]">
+                    <%for(var i=0; i<books.length; i++){%>
+                        <option value="<%= books[i].id %>"> <%= books[i].title %> </option>
+                    <%}%>
+                </select>
+            </div>
+            <input type="submit" value="Create flash sale">
+        </form>
+    </body>
+</html>
