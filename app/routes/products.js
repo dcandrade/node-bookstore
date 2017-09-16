@@ -68,4 +68,42 @@ module.exports = function(app){
 
         connection.end();
     });
+
+    app.get("/products/detail", function(request, response){
+        var id = request.query.id;
+        var connection = app.infra.connectionFactory();
+        var productsDAL = new app.infra.ProductsDAO(connection);
+
+        productsDAL.getBook(id, function(error, result){
+            response.render("products/detail", {
+                product: result[0]
+            })
+        })
+
+        connection.end();
+    });
+
+    app.post("/products/detail", function(request, response){
+        var book = request.body;
+        var connection = app.infra.connectionFactory();
+        var productsDAL = new app.infra.ProductsDAO(connection);
+
+        productsDAL.editBook(book, function(error, result){
+            response.redirect("/products");
+        });
+
+        connection.end();
+    });
+
+    app.post("/products/delete", function(request, response){
+        var id = request.body.id;
+        var connection = app.infra.connectionFactory();
+        var productsDAL = new app.infra.ProductsDAO(connection);
+
+        productsDAL.deleteBook(id, function(error, result){
+            response.redirect("/products");
+        });
+
+        connection.end();
+    });
 }
