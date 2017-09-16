@@ -75,9 +75,18 @@ module.exports = function(app){
         var productsDAL = new app.infra.ProductsDAO(connection);
 
         productsDAL.getBook(id, function(error, result){
-            response.render("products/detail", {
-                product: result[0]
-            })
+            var book = result[0];
+            response.format({
+                html: function(){
+                    response.render("products/detail", {
+                        product: book
+                    });
+                },
+                json: function(){
+                    response.json(book);
+                }
+            });
+       
         })
 
         connection.end();
@@ -89,7 +98,14 @@ module.exports = function(app){
         var productsDAL = new app.infra.ProductsDAO(connection);
 
         productsDAL.editBook(book, function(error, result){
-            response.redirect("/products");
+            response.format({
+                html: function(){
+                    response.redirect("/products");                    
+                },
+                json: function(){
+                    response.status(200).json(book);
+                }
+            });
         });
 
         connection.end();
@@ -101,7 +117,14 @@ module.exports = function(app){
         var productsDAL = new app.infra.ProductsDAO(connection);
 
         productsDAL.deleteBook(id, function(error, result){
-            response.redirect("/products");
+            response.format({
+                html: function(){
+                    response.redirect("/products");
+                },
+                json: function(){
+                    response.status(200).json(id);
+                }
+            });
         });
 
         connection.end();
