@@ -4,23 +4,16 @@ module.exports = function(){
 
 var createDBConnection = function(){
     var mysql = require("mysql");
+    var connectionData = require("./connectionData")();
     var env = process.env.NODE_ENV;
+
+    //console.log(connectionData())
     
     if(!process.env.NODE_ENV || process.env.NODE_ENV == 'development'){
-            return mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "bookstore_dev"
-        });
+            return mysql.createConnection(connectionData.development);
     }
 
     if(process.env.NODE_ENV == 'production'){
-        return mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "bookstore"
-        });
+        return mysql.createConnection(connectionData.production);
     }
 }
